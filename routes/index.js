@@ -73,8 +73,9 @@ router.get('/api/sup', (req, res) => {
   })
 });
 
-router.get('/api/sort', (req, res) => {
-  connection.query('SELECT * FROM moto ORDER BY date', (err, results) => {
+router.get('/api/sort/:par', (req, res) => {
+  const par = req.params.par.toUpperCase();
+  connection.query(`SELECT * FROM moto ORDER BY date ${par}`, (err, results) => {
     if(err) {
       console.log(err);
       res.sendStatus(500);
